@@ -109,7 +109,7 @@ class BrowserExporter(Exporter):
         resources['output_extension'] = '.pdf'
         nb_home = resources['metadata']['path']
 
-        p = launch_chrome()
+        p = launch_chrome(extra_chrome_args)
         html_data = get_html_data(nb, resources, **kw)
         _, tf_name = mkstemp(dir=nb_home, suffix='.html')
         with open(tf_name, 'w') as f:
