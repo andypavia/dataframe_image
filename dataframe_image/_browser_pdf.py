@@ -66,15 +66,18 @@ async def main(file_name, p):
             return pdf_data
     
 
-def launch_chrome():
-    chrome_path = get_chrome_path()
-    args = [chrome_path,
+def get_default_chrome_args():
+    return [
         '--headless',
-        '--disable-gpu', 
+        '--disable-gpu',
         '--run-all-compositor-stages-before-draw',
         '--remote-debugging-port=9222',
-        '--no-sandbox'
     ]
+
+def launch_chrome(extra_chrome_args: list = []):
+    chrome_path = get_chrome_path()
+    default_chrome_args = get_default_chrome_args()
+    args = [chrome_path] + default_chrome_args + extra_chrome_args
     p = Popen(args=args)
     return p
 
